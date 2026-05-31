@@ -1,35 +1,94 @@
-# Civic Assist - Public Utility Portal
+<div align="center">
+  <img src="https://img.icons8.com/color/96/000000/city-buildings.png" alt="City Logo"/>
+  <h1>🏛️ Civic Assist - Public Utility Portal</h1>
+  <p><strong>A Modern, High-Performance Citizen Service Dashboard</strong></p>
 
-Civic Assist is a modern, responsive, Citizen Service Portal designed to digitize and streamline public utilities and government interactions. Originally conceived as a React application, this project has been completely rebuilt in **Vanilla HTML, CSS, and JavaScript** to provide maximum performance, simplicity, and ease of deployment without relying on complex build steps.
+  <p>
+    <a href="#features">Features</a> • 
+    <a href="#tech-stack">Tech Stack</a> • 
+    <a href="#installation--usage">Installation</a> • 
+    <a href="#contact--author">Contact</a>
+  </p>
 
-## Features
+  ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+  ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+  ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+  ![JSON Server](https://img.shields.io/badge/JSON_Server-323330?style=for-the-badge&logo=json&logoColor=white)
+</div>
 
-- **Complaint Management:** Citizens can file, track, and filter complaints across various government departments and districts.
-- **Service Outages:** Live monitoring of current service disruptions (Water, Electricity, Gas) with estimated restoration times.
-- **Office Queues:** Citizens can view live token numbers and estimated waiting times for government offices, and even generate a self-token digitally.
-- **Admin Dashboard:** A robust backend interface to easily manage Outages, Queues, and Complaint statuses with full CRUD functionality.
+---
 
-## Technology Stack
+## 📌 Overview
+Civic Assist is a streamlined, responsive web application designed to digitize government interactions and public utilities. By migrating away from complex frontend frameworks, this project utilizes pure Vanilla web technologies to deliver blazing fast load times, zero build steps, and maximum accessibility. 
 
-- **Frontend:** Pure HTML5, CSS3, and Vanilla JavaScript.
-- **Backend Mocking:** JSON Server (`db.json`) for realistic API interactions (`GET`, `POST`, `PATCH`, `DELETE`).
-- **Icons:** Lucide Icons.
+The entire source code for this project is located inside the **[`/civic-assist-vanilla`](./civic-assist-vanilla)** directory.
 
-## How to Run Locally
+---
 
-1. Clone this repository.
-2. Navigate to the `civic-assist-vanilla` directory.
-3. Start the JSON server to handle the backend data:
+## ✨ Core Features
+
+### 📋 1. Digital Complaint Management
+- Citizens can file, track, and manage complaints across multiple distinct government divisions (e.g., *HUD & PHE, Punjab Police, Revenue Board, Education Sector*).
+- Features dynamic, searchable dropdowns and rigorous ID generation to ensure completely unique tracking numbers (e.g., `CMP-8214`).
+
+### ⚡ 2. Live Service Outages
+- A real-time grid monitoring active utility disruptions (Electricity, Water Supply).
+- Displays exact affected areas, live status badges, and estimated restoration times to keep the public informed.
+
+### 🎟️ 3. Smart Queue System
+- Citizens can monitor live digital queues at physical government offices (e.g., *DC Office, Lahore*).
+- Includes the ability to **Self-Generate a Digital Token** from home, drastically reducing physical waiting times in government buildings.
+
+### 🔐 4. Secure Admin Dashboard
+- A dedicated backend interface (`admin.html`) allowing administrative staff to securely manage the database.
+- Features complete **CRUD capabilities**: Admin can dynamically add, edit, or resolve complaints, queues, and outages on the fly.
+
+---
+
+## 🛠️ Tech Stack
+
+This project was intentionally designed without a build step for maximum portability.
+
+- **Frontend Architecture:** Vanilla HTML5, CSS3, ES6 JavaScript
+- **Backend / Database:** [JSON Server](https://github.com/typicode/json-server) providing a full REST API (`GET`, `POST`, `PATCH`, `DELETE`)
+- **Iconography:** [Lucide Icons](https://lucide.dev/)
+- **Typography:** Inter (Google Fonts)
+
+---
+
+## 🚀 Installation & Usage
+
+To run this project locally, follow these simple steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/mianhasssan/public-utility-portal.git
+   ```
+
+2. **Navigate into the project folder:**
+   ```bash
+   cd public-utility-portal/civic-assist-vanilla
+   ```
+
+3. **Start the backend JSON Database:**
+   *(Ensure you have Node.js installed)*
    ```bash
    npx json-server --watch db.json
    ```
-4. Open `index.html` in your browser (or use the VS Code Live Server extension).
-5. Access the Admin Panel by clicking "Admin Login" in the navbar, or by opening `admin.html` directly.
 
-## Structure
+4. **Launch the Frontend:**
+   Simply open `index.html` in your favorite web browser, or use the **Live Server** extension in VS Code.
 
-All core logic is contained within the `civic-assist-vanilla` directory.
-- `index.html` / `app.js` - Main citizen portal.
-- `admin.html` / `admin.js` - Admin control panel.
-- `style.css` - Global stylesheet including the modern UI design system.
-- `db.json` - The local database structure powering the dynamic data.
+---
+
+## 📞 Contact & Author
+
+**Mian Muhammad Hassan**  
+*Full Stack Developer & Engineer*
+
+- 🌐 **GitHub:** [@mianhasssan](https://github.com/mianhasssan)
+- 💼 **LinkedIn:** [Your LinkedIn Profile URL]
+- 📧 **Email:** [Your Email Address]
+- 📁 **Portfolio:** [Your Portfolio Website URL]
+
+> *Feel free to reach out for collaborations, feedback, or inquiries regarding this Capstone Project!*
