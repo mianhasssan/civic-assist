@@ -91,4 +91,4 @@ To run this project locally, follow these simple steps:
 - 📧 **Email:** [mmh427726@gmail.com]
 
 
-> *Feel free to reach out for collaborations, feedback, or inquiries regarding this Capstone Project!*
+> *Feel free to reach out for collaborations, feedback, or inquiries regarding this Project!*
