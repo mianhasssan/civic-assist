@@ -84,11 +84,11 @@ To run this project locally, follow these simple steps:
 ## 📞 Contact & Author
 
 **Mian Muhammad Hassan**  
-*Full Stack Developer & Engineer*
+*AI Developer*
 
 - 🌐 **GitHub:** [@mianhasssan](https://github.com/mianhasssan)
-- 💼 **LinkedIn:** [Your LinkedIn Profile URL]
-- 📧 **Email:** [Your Email Address]
-- 📁 **Portfolio:** [Your Portfolio Website URL]
+- 💼 **LinkedIn:** [https://www.linkedin.com/in/mianmuhammadhassan322]
+- 📧 **Email:** [mmh427726@gmail.com]
+
 
 > *Feel free to reach out for collaborations, feedback, or inquiries regarding this Capstone Project!*
