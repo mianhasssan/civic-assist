@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Civic Assist - Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="admin.html" class="navbar-brand">
+          <div class="logo-container">
+            <div class="drop-shape">
+              <i data-lucide="shield" color="white" width="16" height="16"></i>
+            </div>
+          </div>
+          <div class="brand-text">
+            <h1 class="brand-title">Civic Assist Admin</h1>
+            <span class="brand-subtitle">Control Panel</span>
+          </div>
+        </a>
+        
+        <div class="navbar-links">
+          <a href="index.html" class="btn-modern btn-secondary-outline" style="text-decoration: none;">Back to User Panel</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-content page-wrapper">
+      <header class="page-header">
+        <div class="page-header-content">
+          <h1>Admin Dashboard</h1>
+          <p>Manage complaints, outages, and queues.</p>
+        </div>
+      </header>
+
+      <div class="page-container">
+        
+        <!-- Tab Control -->
+        <div class="tab-control">
+          <button class="tab-btn active" id="tab-complaints-btn" onclick="switchAdminTab('complaints')">
+            <i data-lucide="list" width="18" height="18"></i> Complaints
+          </button>
+          <button class="tab-btn" id="tab-outages-btn" onclick="switchAdminTab('outages')">
+            <i data-lucide="zap" width="18" height="18"></i> Outages
+          </button>
+          <button class="tab-btn" id="tab-queues-btn" onclick="switchAdminTab('queues')">
+            <i data-lucide="clock" width="18" height="18"></i> Queues
+          </button>
+        </div>
+
+        <!-- ==================== COMPLAINTS PANE ==================== -->
+        <div id="pane-complaints" class="tab-pane animate-fade-in" style="display: block;">
+          <!-- Stats Section -->
+          <div class="outage-grid" style="margin-bottom: 24px;">
+            <div class="card" style="margin-bottom: 0;">
+              <div class="card-header border-bottom">
+                <i data-lucide="bar-chart" width="20" height="20" class="card-icon"></i>
+                <h2>Total Complaints</h2>
+              </div>
+              <div style="padding: 24px; font-size: 32px; font-weight: 700; color: #1e293b;" id="stat-total">0</div>
+            </div>
+            <div class="card" style="margin-bottom: 0;">
+              <div class="card-header border-bottom">
+                <i data-lucide="check-circle" width="20" height="20" style="color: #16a34a;"></i>
+                <h2>Resolved</h2>
+              </div>
+              <div style="padding: 24px; font-size: 32px; font-weight: 700; color: #16a34a;" id="stat-resolved">0%</div>
+            </div>
+            <div class="card" style="margin-bottom: 0;">
+              <div class="card-header border-bottom">
+                <i data-lucide="clock" width="20" height="20" style="color: #d97706;"></i>
+                <h2>Pending</h2>
+              </div>
+              <div style="padding: 24px; font-size: 32px; font-weight: 700; color: #d97706;" id="stat-pending">0</div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
+            
+            <!-- Edit Form -->
+            <div class="card form-card">
+              <div class="card-header border-bottom">
+                <i data-lucide="edit" width="20" height="20" class="card-icon"></i>
+                <h2>Edit Status</h2>
+              </div>
+              <form id="admin-form" class="modern-form">
+                <input type="hidden" id="edit-id">
+                <div class="input-group full-width" style="margin-bottom: 16px;">
+                  <label>Name (Read Only)</label>
+                  <input type="text" id="edit-name" class="modern-input" readonly style="background-color: #f8fafc;">
+                </div>
+                <div class="input-group full-width" style="margin-bottom: 16px;">
+                  <label>District (Read Only)</label>
+                  <input type="text" id="edit-district" class="modern-input" readonly style="background-color: #f8fafc;">
+                </div>
+                <div class="input-group full-width" style="margin-bottom: 16px;">
+                  <label>Update Status</label>
+                  <select id="edit-status" class="modern-select">
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                  </select>
+                </div>
+                <div class="form-actions mt-4" style="border-top: none; padding-top: 0;">
+                  <button type="submit" id="submit-btn" class="btn-modern btn-submit full-width" disabled>Save Changes</button>
+                  <button type="button" id="clear-btn" class="btn-modern btn-cancel full-width" disabled>Cancel</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Table -->
+            <div class="card table-card">
+              <div class="card-header border-bottom">
+                <i data-lucide="database" width="20" height="20" class="card-icon"></i>
+                <h2>All Complaints</h2>
+              </div>
+              <div class="table-responsive">
+                <table class="modern-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Department</th>
+                      <th>District</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-list"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== OUTAGES PANE ==================== -->
+        <div id="pane-outages" class="tab-pane animate-fade-in" style="display: none;">
+          <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
+            <div class="card form-card">
+              <div class="card-header border-bottom">
+                <i data-lucide="plus" width="20" height="20" class="card-icon"></i>
+                <h2>Add / Edit Outage</h2>
+              </div>
+              <form id="outage-form" class="modern-form">
+                <input type="hidden" id="edit-outage-id">
+                <div class="input-group full-width" style="margin-bottom: 16px;">
+                  <label>Affected Area</label>
+                  <input type="text" id="outage-area" class="modern-input" required>
+                </div>
+                <div class="input-group full-width" style="margin-bottom: 16px;">
+                  <label>Service</label>
+                  <select id="outage-service" class="modern-select" required>
+                    <option value="Electricity">Electricity</option>
+                    <option value="Water Supply">Water Supply</option>
+                    <option value="Gas Supply">Gas Supply</option>
+                  </select>
+                </div>
+                <div class="input-group full-width" style="margin-bottom: 16px;">
+                  <label>Est. Restoration</label>
+                  <input type="text" id="outage-time" class="modern-input" placeholder="e.g. 2026-04-05 02:00 PM" required>
+                </div>
+                <div class="input-group full-width" style="margin-bottom: 16px;">
+                  <label>Status</label>
+                  <select id="outage-status" class="modern-select">
+                    <option value="Active">Active</option>
+                    <option value="Resolved">Resolved</option>
+                  </select>
+                </div>
+                <div class="form-actions mt-4" style="border-top: none; padding-top: 0; display: flex; gap: 8px;">
+                  <button type="submit" class="btn-modern btn-submit full-width">Save Outage</button>
+                  <button type="button" id="outage-cancel-btn" class="btn-modern btn-cancel full-width" style="display: none;">Cancel</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card table-card">
+              <div class="card-header border-bottom">
+                <i data-lucide="zap" width="20" height="20" class="card-icon"></i>
+                <h2>Current Outages</h2>
+              </div>
+              <div class="table-responsive">
+                <table class="modern-table">
+                  <thead>
+                    <tr>
+                      <th>Area</th>
+                      <th>Service</th>
+                      <th>Restoration</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-outages-list"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== QUEUES PANE ==================== -->
+        <div id="pane-queues" class="tab-pane animate-fade-in" style="display: none;">
+          <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
+            <div class="card form-card">
+              <div class="card-header border-bottom">
+                <i data-lucide="plus" width="20" height="20" class="card-icon"></i>
+                <h2>Add / Edit Queue</h2>
+              </div>
+              <form id="queue-form" class="modern-form">
+                <input type="hidden" id="edit-queue-id">
+                <div class="input-group full-width" style="margin-bottom: 16px;">
+                  <label>Office Name</label>
+                  <input type="text" id="queue-office" class="modern-input" placeholder="e.g. DC Office, Lahore" required>
+                </div>
+                <div class="input-group full-width" style="margin-bottom: 16px;">
+                  <label>Current Token</label>
+                  <input type="text" id="queue-token" class="modern-input" placeholder="e.g. A-45" required>
+                </div>
+                <div class="input-group full-width" style="margin-bottom: 16px;">
+                  <label>Waiting Time</label>
+                  <input type="text" id="queue-time" class="modern-input" placeholder="e.g. 15 mins" required>
+                </div>
+                <div class="input-group full-width" style="margin-bottom: 16px;">
+                  <label>Status</label>
+                  <select id="queue-status" class="modern-select">
+                    <option value="Open">Open</option>
+                    <option value="Closed">Closed</option>
+                  </select>
+                </div>
+                <div class="form-actions mt-4" style="border-top: none; padding-top: 0; display: flex; gap: 8px;">
+                  <button type="submit" class="btn-modern btn-submit full-width">Save Queue</button>
+                  <button type="button" id="queue-cancel-btn" class="btn-modern btn-cancel full-width" style="display: none;">Cancel</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card table-card">
+              <div class="card-header border-bottom">
+                <i data-lucide="clock" width="20" height="20" class="card-icon"></i>
+                <h2>Live Queues</h2>
+              </div>
+              <div class="table-responsive">
+                <table class="modern-table">
+                  <thead>
+                    <tr>
+                      <th>Office</th>
+                      <th>Token</th>
+                      <th>Wait Time</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-queues-list"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

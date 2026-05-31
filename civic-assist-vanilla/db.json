@@ -1,0 +1,100 @@
+{
+  "complaints": [
+    {
+      "id": "CMP-001",
+      "appNo": "CMP-001",
+      "name": "Mian Muhammad Hassan",
+      "department": "HUD & PHE",
+      "district": "Bahawalpur",
+      "details": "No water supply in area for 3 days",
+      "date": "2026-04-04",
+      "status": "Resolved"
+    },
+    {
+      "id": "CMP-002",
+      "appNo": "CMP-002",
+      "name": "Fatima Khan",
+      "department": "DC Office",
+      "district": "Lahore",
+      "details": "Road damaged near market",
+      "date": "2026-04-03",
+      "status": "Pending"
+    },
+    {
+      "id": "CMP-003",
+      "appNo": "CMP-003",
+      "name": "Ahmed Ali",
+      "department": "School Education",
+      "district": "Multan",
+      "details": "School building maintenance issue",
+      "date": "2026-04-02",
+      "status": "Pending"
+    },
+    {
+      "appNo": "CMP-9053",
+      "name": "Mariyam Nawaz",
+      "gender": "Female",
+      "phone": "025762762",
+      "district": "Lahore",
+      "department": "DC Office",
+      "details": "Fake notice BY DC",
+      "date": "2026-05-31",
+      "status": "Pending",
+      "id": "KSnVXZ48T2Y"
+    }
+  ],
+  "outages": [
+    {
+      "id": "OUT-001",
+      "area": "Bahawalpur City",
+      "service": "Water Supply",
+      "status": "Active",
+      "restoreTime": "2026-04-05 10:00 AM"
+    },
+    {
+      "id": "OUT-002",
+      "area": "Lahore North",
+      "service": "Electricity",
+      "status": "Active",
+      "restoreTime": "2026-04-05 02:00 PM"
+    },
+    {
+      "id": "MQLqyD2uZi0",
+      "area": "Islamia University",
+      "service": "Gas Supply",
+      "restoreTime": "2026-08-05 09:11 AM",
+      "status": "Active"
+    },
+    {
+      "area": "Bahawalpur-One Unit Chowk",
+      "service": "Electricity",
+      "restoreTime": "2026-06-05 09:11 AM",
+      "status": "Active",
+      "id": "JYVXp5dt9p4"
+    }
+  ],
+  "queues": [
+    {
+      "id": "Q-001",
+      "office": "DC Office, Bahawalpur",
+      "token": "A-55",
+      "waitingTime": "15 minutes",
+      "status": "Open"
+    },
+    {
+      "id": "oDIIyPA5uFk",
+      "office": "Agriculture & Livestock, Bahawalpur",
+      "token": "O-53",
+      "waitingTime": "15 mins",
+      "status": "Closed"
+    },
+    {
+      "id": "7D0m8WH1jfc",
+      "office": "Local Government, Bahawalpur",
+      "token": "W-84",
+      "waitingTime": "15 mins",
+      "status": "Open"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
