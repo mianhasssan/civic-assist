@@ -21,7 +21,7 @@
 ## 📌 Overview
 Civic Assist is a streamlined, responsive web application designed to digitize government interactions and public utilities. By migrating away from complex frontend frameworks, this project utilizes pure Vanilla web technologies to deliver blazing fast load times, zero build steps, and maximum accessibility. 
 
-The entire source code for this project is located inside the **[`/civic-assist-vanilla`](./civic-assist-vanilla)** directory.
+The entire source code for this project is located inside the **[`/civic-assist`](./civic-assist)** directory.
 
 ---
 
@@ -67,7 +67,7 @@ To run this project locally, follow these simple steps:
 
 2. **Navigate into the project folder:**
    ```bash
-   cd public-utility-portal/civic-assist-vanilla
+   cd public-utility-portal/civic-assist
    ```
 
 3. **Start the backend JSON Database:**
