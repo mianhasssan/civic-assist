@@ -44,7 +44,7 @@ async function fetchComplaints() {
     <tr><td colspan="8" style="text-align:center; padding: 24px; color: #64748b;">Loading complaints...</td></tr>
   `;
   try {
-    await new Promise(r => setTimeout(r, 800)); // Artificial delay for viva
+    await new Promise(r => setTimeout(r, 800));
     const response = await fetch(API_URL);
     if (!response.ok) throw new Error("Network response was not ok");
     

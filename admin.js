@@ -29,7 +29,7 @@ let currentComplaints = [];
 async function fetchComplaints() {
   adminList.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 24px; color: #64748b;">Loading complaints...</td></tr>`;
   try {
-    await new Promise(r => setTimeout(r, 800)); // Artificial delay for viva
+    await new Promise(r => setTimeout(r, 800)); 
     const response = await fetch(API_COMPLAINTS);
     if (!response.ok) throw new Error("Network response was not ok");
     currentComplaints = await response.json();
@@ -187,7 +187,7 @@ let currentOutages = [];
 async function fetchOutages() {
   outagesList.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 24px; color: #64748b;">Loading outages...</td></tr>`;
   try {
-    await new Promise(r => setTimeout(r, 800)); // Artificial delay for viva
+    await new Promise(r => setTimeout(r, 800)); 
     const res = await fetch(API_OUTAGES);
     currentOutages = await res.json();
     outagesList.innerHTML = "";
@@ -319,7 +319,7 @@ let currentQueues = [];
 async function fetchQueues() {
   queuesList.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 24px; color: #64748b;">Loading queues...</td></tr>`;
   try {
-    await new Promise(r => setTimeout(r, 800)); // Artificial delay for viva
+    await new Promise(r => setTimeout(r, 800)); 
     const res = await fetch(API_QUEUES);
     currentQueues = await res.json();
     queuesList.innerHTML = "";
