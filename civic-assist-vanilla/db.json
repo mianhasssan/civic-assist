@@ -28,7 +28,7 @@
       "district": "Multan",
       "details": "School building maintenance issue",
       "date": "2026-04-02",
-      "status": "Pending"
+      "status": "Resolved"
     },
     {
       "appNo": "CMP-9053",
@@ -41,6 +41,18 @@
       "date": "2026-05-31",
       "status": "Pending",
       "id": "KSnVXZ48T2Y"
+    },
+    {
+      "appNo": "CMP-1908",
+      "name": "Pervaiz Akhtar",
+      "gender": "Male",
+      "phone": "0262626262662",
+      "district": "Bahawalnagar",
+      "department": "Board of Revenue",
+      "details": "Bill PAID but again received challan",
+      "date": "2026-06-02",
+      "status": "In Progress",
+      "id": "H_yQAehOpfE"
     }
   ],
   "outages": [
@@ -55,7 +67,7 @@
       "id": "OUT-002",
       "area": "Lahore North",
       "service": "Electricity",
-      "status": "Active",
+      "status": "Resolved",
       "restoreTime": "2026-04-05 02:00 PM"
     },
     {
@@ -69,8 +81,15 @@
       "area": "Bahawalpur-One Unit Chowk",
       "service": "Electricity",
       "restoreTime": "2026-06-05 09:11 AM",
-      "status": "Active",
+      "status": "Resolved",
       "id": "JYVXp5dt9p4"
+    },
+    {
+      "area": "Model Town",
+      "service": "Electricity",
+      "restoreTime": "2026-08-12 11:11 AM",
+      "status": "Active",
+      "id": "d-IfZs_w3xQ"
     }
   ],
   "queues": [
@@ -92,6 +111,20 @@
       "id": "7D0m8WH1jfc",
       "office": "Local Government, Bahawalpur",
       "token": "W-84",
+      "waitingTime": "15 mins",
+      "status": "Open"
+    },
+    {
+      "id": "vs-ollX11K0",
+      "office": "School Education, Attock",
+      "token": "L-42",
+      "waitingTime": "15 mins",
+      "status": "Open"
+    },
+    {
+      "id": "lneWq0blI6E",
+      "office": "Health Department, Chakwal",
+      "token": "P-32",
       "waitingTime": "15 mins",
       "status": "Open"
     }

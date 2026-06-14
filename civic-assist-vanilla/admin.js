@@ -1,23 +1,20 @@
-// ================================================================
-//  Civic Assist — admin.js (Admin Panel)
-// ================================================================
 
-// ==================== TAB LOGIC ====================
+//  TAB 
 function switchAdminTab(tabId) {
-  // Buttons
+  
   document.getElementById('tab-complaints-btn').classList.remove('active');
   document.getElementById('tab-outages-btn').classList.remove('active');
   document.getElementById('tab-queues-btn').classList.remove('active');
   document.getElementById('tab-' + tabId + '-btn').classList.add('active');
 
-  // Panes
+  
   document.getElementById('pane-complaints').style.display = 'none';
   document.getElementById('pane-outages').style.display = 'none';
   document.getElementById('pane-queues').style.display = 'none';
   document.getElementById('pane-' + tabId).style.display = 'block';
 }
 
-// ==================== COMPLAINTS LOGIC ====================
+// COMPLAINTS
 const API_COMPLAINTS = "http://localhost:3000/complaints";
 const adminList = document.getElementById("admin-list");
 const form = document.getElementById("admin-form");
@@ -139,7 +136,7 @@ clearBtn.addEventListener("click", function () {
 });
 
 
-// ==================== OUTAGES LOGIC ====================
+//  OUTAGES 
 const API_OUTAGES = "http://localhost:3000/outages";
 const outagesList = document.getElementById("admin-outages-list");
 const outageForm = document.getElementById("outage-form");
@@ -193,7 +190,7 @@ outageForm.addEventListener("submit", async function(e) {
   };
 
   if (id) {
-    // Update existing
+  
     await fetch(`${API_OUTAGES}/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -201,8 +198,10 @@ outageForm.addEventListener("submit", async function(e) {
     });
     outageCancelBtn.style.display = "none";
     editOutageId.value = "";
+
+
   } else {
-    // Add new
+    
     let newId = "";
     let isUnique = false;
     while (!isUnique) {
@@ -262,7 +261,7 @@ outagesList.addEventListener("click", async function(e) {
 });
 
 
-// ==================== QUEUES LOGIC ====================
+//  QUEUES 
 const API_QUEUES = "http://localhost:3000/queues";
 const queuesList = document.getElementById("admin-queues-list");
 const queueForm = document.getElementById("queue-form");
@@ -377,7 +376,7 @@ queuesList.addEventListener("click", async function(e) {
 });
 
 
-// ==================== INIT ====================
+
 fetchComplaints();
 fetchOutages();
 fetchQueues();

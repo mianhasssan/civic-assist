@@ -1,4 +1,4 @@
-/* Global styles reset */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 * {
@@ -27,9 +27,9 @@ html, body {
   flex-direction: column;
 }
 
-/* ================================================================
+/* 
    Navbar
-================================================================ */
+ */
 .navbar {
   width: 100%;
   background-color: white;
@@ -127,9 +127,9 @@ html, body {
   color: #0d83c6;
 }
 
-/* ================================================================
+/* 
    Shared Page Styles
-================================================================ */
+*/
 .page-view {
   display: none;
 }
@@ -192,9 +192,9 @@ html, body {
   padding: 40px 24px;
 }
 
-/* ================================================================
+/* 
    Home
-================================================================ */
+ */
 .home-container { width: 100%; }
 
 .hero-section {
@@ -357,9 +357,9 @@ html, body {
 
 .card-link:hover { text-decoration: underline; }
 
-/* ================================================================
+/* 
    Complaint
-================================================================ */
+*/
 .tab-control {
   display: inline-flex;
   background-color: #e2e8f0;
@@ -658,9 +658,9 @@ html, body {
   padding: 16px 24px; border-top: 1px solid #f1f5f9; display: flex; justify-content: flex-end; background: #fafafa;
 }
 
-/* ================================================================
+/* 
    Outages & Queues
-================================================================ */
+ */
 .outage-grid, .queue-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
