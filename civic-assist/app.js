@@ -1,49 +1,50 @@
-// ================================================================
-//  Civic Assist — app.js (User Panel SPA)
-// ================================================================
+
 
 const API_URL = "http://localhost:3000/complaints";
 let currentComplaints = [];
 
-// Initialize Lucide icons on first load
 lucide.createIcons();
 
-// ==================== ROUTING LOGIC ====================
+//ROUTING  
 function navigateTo(pageId) {
-  // Hide all pages
+  
   document.querySelectorAll('.page-view').forEach(page => {
     page.classList.remove('active');
   });
-  // Show target
+  
   document.getElementById('view-' + pageId).classList.add('active');
 
-  // Update navbar active state
+  
   document.querySelectorAll('.nav-item').forEach(nav => {
     nav.classList.remove('active');
   });
   const activeNav = document.getElementById('nav-' + pageId);
   if (activeNav) activeNav.classList.add('active');
 
-  // Scroll to top
+ 
   window.scrollTo(0,0);
 }
 
-// ==================== COMPLAINTS TAB LOGIC ====================
+//  COMPLAINTS TAB 
 function switchComplaintTab(tabId) {
-  // Buttons
+  
   document.getElementById('tab-view-btn').classList.remove('active');
   document.getElementById('tab-form-btn').classList.remove('active');
   document.getElementById('tab-' + tabId + '-btn').classList.add('active');
 
-  // Panes
+  
   document.getElementById('pane-view').style.display = 'none';
   document.getElementById('pane-form').style.display = 'none';
   document.getElementById('pane-' + tabId).style.display = 'block';
 }
 
-// ==================== FETCH COMPLAINTS ====================
+// FETCH COMPLAINTS 
 async function fetchComplaints() {
+  document.getElementById('complaints-list').innerHTML = `
+    <tr><td colspan="8" style="text-align:center; padding: 24px; color: #64748b;">Loading complaints...</td></tr>
+  `;
   try {
+    await new Promise(r => setTimeout(r, 800)); // Artificial delay for viva
     const response = await fetch(API_URL);
     if (!response.ok) throw new Error("Network response was not ok");
     
@@ -52,12 +53,12 @@ async function fetchComplaints() {
   } catch (error) {
     console.error("Fetch error:", error);
     document.getElementById('complaints-list').innerHTML = `
-      <tr><td colspan="8" style="color:red; text-align:center;">Error loading complaints. Is JSON server running?</td></tr>
+      <tr><td colspan="8" style="color:red; text-align:center; padding: 24px;">Error loading complaints.</td></tr>
     `;
   }
 }
 
-// ==================== RENDER COMPLAINTS ====================
+// RENDER COMPLAINTS
 function renderComplaints(dataList) {
   const list = document.getElementById('complaints-list');
   list.innerHTML = "";
@@ -65,7 +66,7 @@ function renderComplaints(dataList) {
   dataList.forEach(c => {
     const tr = document.createElement('tr');
     
-    // Status pill
+    
     let pillClass = "pending";
     let icon = "clock";
     if (c.status === "In Progress") { pillClass = "in-progress"; icon = "activity"; }
@@ -92,11 +93,11 @@ function renderComplaints(dataList) {
 
   document.getElementById('table-footer-text').textContent = `Showing ${dataList.length} records`;
   
-  // Re-initialize icons for newly added HTML
+ 
   lucide.createIcons();
 }
 
-// ==================== FILTERING ====================
+//  FILTERING
 function applyFilters() {
   const fromDate = document.getElementById('filter-from').value;
   const toDate = document.getElementById('filter-to').value;
@@ -124,9 +125,86 @@ function clearFilters() {
   renderComplaints(currentComplaints);
 }
 
-// ==================== FORM SUBMIT (POST) ====================
+// VALIDATION HELPERS 
+function showError(inputEl, errorId, message) {
+  inputEl.classList.add("input-error");
+  const span = document.getElementById(errorId);
+  span.textContent = message;
+  span.classList.add("visible");
+}
+
+function clearError(inputEl, errorId) {
+  inputEl.classList.remove("input-error");
+  const span = document.getElementById(errorId);
+  span.textContent = "";
+  span.classList.remove("visible");
+}
+
+function validateComplaintForm() {
+  let isValid = true;
+  
+  const nameInput = document.getElementById('input-name');
+  if (!nameInput.value.trim()) {
+    showError(nameInput, "err-name", "Full Name is required.");
+    isValid = false;
+  } else {
+    clearError(nameInput, "err-name");
+  }
+
+  const genderInput = document.getElementById('input-gender');
+  if (!genderInput.value) {
+    showError(genderInput, "err-gender", "Please select a gender.");
+    isValid = false;
+  } else {
+    clearError(genderInput, "err-gender");
+  }
+
+  const phoneInput = document.getElementById('input-phone');
+  const phoneVal = phoneInput.value.trim();
+  if (!phoneVal) {
+    showError(phoneInput, "err-phone", "Mobile Number is required.");
+    isValid = false;
+  } else if (!/^\d+$/.test(phoneVal.replace(/\D/g, ''))) {
+    showError(phoneInput, "err-phone", "Phone number must be valid digits.");
+    isValid = false;
+  } else {
+    clearError(phoneInput, "err-phone");
+  }
+
+  const districtInput = document.getElementById('input-district');
+  if (!districtInput.value) {
+    showError(districtInput, "err-district", "Please select a district.");
+    isValid = false;
+  } else {
+    clearError(districtInput, "err-district");
+  }
+
+  const deptInput = document.getElementById('input-department');
+  if (!deptInput.value) {
+    showError(deptInput, "err-department", "Please select a department.");
+    isValid = false;
+  } else {
+    clearError(deptInput, "err-department");
+  }
+
+  const detailsInput = document.getElementById('input-details');
+  if (!detailsInput.value.trim()) {
+    showError(detailsInput, "err-details", "Complaint details cannot be empty.");
+    isValid = false;
+  } else {
+    clearError(detailsInput, "err-details");
+  }
+
+  return isValid;
+}
+
+// FORM SUBMIT (POST) 
 document.getElementById('complaint-form').addEventListener('submit', async function(e) {
   e.preventDefault();
+
+  if (!validateComplaintForm()) {
+    return;
+  }
 
   const name = document.getElementById('input-name').value.trim();
   const gender = document.getElementById('input-gender').value;
@@ -135,16 +213,10 @@ document.getElementById('complaint-form').addEventListener('submit', async funct
   const department = document.getElementById('input-department').value;
   const details = document.getElementById('input-details').value.trim();
 
-  if (!name || !gender || !phone || !district || !department || !details) {
-    alert("Please fill all required fields marked with *");
-    return;
-  }
-
   let newAppId = "";
   let isUnique = false;
   while (!isUnique) {
     newAppId = "CMP-" + String(Math.floor(Math.random() * 9000) + 1000);
-    // Check against currentComplaints array which we already have in memory
     isUnique = !currentComplaints.some(c => c.appNo === newAppId || c.id === newAppId);
   }
 
@@ -164,10 +236,17 @@ document.getElementById('complaint-form').addEventListener('submit', async funct
 
     if (!response.ok) throw new Error("Failed to submit");
 
-    alert(`Complaint submitted successfully!\n\nApplication No: ${newAppId}`);
     document.getElementById('complaint-form').reset();
     
-    // Refresh list in background but stay on form page
+    // Show success briefly
+    const successDiv = document.getElementById('form-success');
+    successDiv.textContent = `Complaint submitted successfully! Application No: ${newAppId}`;
+    successDiv.style.display = 'block';
+    
+    setTimeout(() => {
+      successDiv.style.display = 'none';
+    }, 5000);
+
     fetchComplaints();
 
   } catch (err) {
@@ -175,7 +254,7 @@ document.getElementById('complaint-form').addEventListener('submit', async funct
   }
 });
 
-// ==================== MODAL LOGIC ====================
+//  MODAL LOGIC 
 function viewComplaint(id) {
   const c = currentComplaints.find(x => x.id === id);
   if (!c) return;
@@ -201,7 +280,7 @@ function closeModal() {
   document.getElementById('view-modal').classList.remove('active');
 }
 
-// ==================== FETCH OUTAGES & QUEUES ====================
+//  FETCH OUTAGES & QUEUES
 async function fetchOutages() {
   try {
     const res = await fetch("http://localhost:3000/outages");
@@ -226,7 +305,7 @@ async function fetchQueues() {
   }
 }
 
-// ==================== DYNAMIC DATA RENDER (Outages & Queues) ====================
+//   DATA RENDER OutagesQueues
 function renderOutages(outages) {
   const grid = document.getElementById('outage-grid');
   grid.innerHTML = "";
@@ -299,13 +378,13 @@ function renderQueues(queues) {
   lucide.createIcons();
 }
 
-// Initial Boot
+
 fetchComplaints();
 fetchOutages();
 fetchQueues();
 lucide.createIcons();
 
-// ==================== QUEUE TAB LOGIC ====================
+//  QUEUE TAB 
 function switchQueueTab(tabId) {
   document.getElementById('tab-queue-live-btn').classList.remove('active');
   document.getElementById('tab-queue-token-btn').classList.remove('active');
@@ -325,10 +404,10 @@ document.getElementById('token-form').addEventListener('submit', async function(
 
   if (!dist || !dept || !name) return;
 
-  // Generate unique token
+
   let generatedToken = "";
   let isUniqueToken = false;
-  // We need to fetch current queues to check uniqueness safely
+  
   let currentQueues = [];
   try {
     const res = await fetch("http://localhost:3000/queues");
@@ -349,7 +428,7 @@ document.getElementById('token-form').addEventListener('submit', async function(
   document.getElementById('token-form').style.display = 'none';
   document.getElementById('token-result').style.display = 'block';
 
-  // Add to Live Queues in db.json automatically
+ 
   const newQueue = {
     id: "Q-" + String(Math.floor(Math.random() * 9000) + 1000),
     office: dept + ", " + dist,

@@ -18,7 +18,7 @@
       "district": "Lahore",
       "details": "Road damaged near market",
       "date": "2026-04-03",
-      "status": "Pending"
+      "status": "Resolved"
     },
     {
       "id": "CMP-003",
@@ -53,6 +53,18 @@
       "date": "2026-06-02",
       "status": "In Progress",
       "id": "H_yQAehOpfE"
+    },
+    {
+      "appNo": "CMP-9321",
+      "name": "Irfan",
+      "gender": "Male",
+      "phone": "0867566674567",
+      "district": "Bahawalpur",
+      "department": "Local Government",
+      "details": "Road maintenances needed",
+      "date": "2026-06-14",
+      "status": "Resolved",
+      "id": "EGqx4zdv6fk"
     }
   ],
   "outages": [
@@ -119,7 +131,7 @@
       "office": "School Education, Attock",
       "token": "L-42",
       "waitingTime": "15 mins",
-      "status": "Open"
+      "status": "Closed"
     },
     {
       "id": "lneWq0blI6E",
@@ -127,6 +139,13 @@
       "token": "P-32",
       "waitingTime": "15 mins",
       "status": "Open"
+    },
+    {
+      "id": "FtbFrHa4ZQA",
+      "office": "C&W & Irrigation, Jhelum",
+      "token": "Q-26",
+      "waitingTime": "15 mins",
+      "status": "Closed"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

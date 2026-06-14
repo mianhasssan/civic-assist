@@ -53,9 +53,9 @@
           </button>
         </div>
 
-        <!-- ==================== COMPLAINTS PANE ==================== -->
+        <!-- COMPLAINTS  -->
         <div id="pane-complaints" class="tab-pane animate-fade-in" style="display: block;">
-          <!-- Stats Section -->
+       
           <div class="outage-grid" style="margin-bottom: 24px;">
             <div class="card" style="margin-bottom: 0;">
               <div class="card-header border-bottom">
@@ -115,9 +115,14 @@
 
             <!-- Table -->
             <div class="card table-card">
-              <div class="card-header border-bottom">
-                <i data-lucide="database" width="20" height="20" class="card-icon"></i>
-                <h2>All Complaints</h2>
+              <div class="card-header border-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <i data-lucide="database" width="20" height="20" class="card-icon"></i>
+                  <h2 style="margin: 0;">All Complaints</h2>
+                </div>
+                <button class="btn-modern btn-submit" onclick="exportToCSV()" style="padding: 6px 12px; font-size: 12px; display: flex; align-items: center;">
+                  <i data-lucide="download" width="14" height="14" style="margin-right: 6px;"></i> Export CSV
+                </button>
               </div>
               <div class="table-responsive">
                 <table class="modern-table">
@@ -138,7 +143,7 @@
           </div>
         </div>
 
-        <!-- ==================== OUTAGES PANE ==================== -->
+        <!--  OUTAGES  -->
         <div id="pane-outages" class="tab-pane animate-fade-in" style="display: none;">
           <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
             <div class="card form-card">
@@ -201,7 +206,7 @@
           </div>
         </div>
 
-        <!-- ==================== QUEUES PANE ==================== -->
+        <!-- QUEUES PANE -->
         <div id="pane-queues" class="tab-pane animate-fade-in" style="display: none;">
           <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
             <div class="card form-card">

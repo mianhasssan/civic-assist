@@ -27,15 +27,55 @@ const clearBtn = document.getElementById("clear-btn");
 let currentComplaints = [];
 
 async function fetchComplaints() {
+  adminList.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 24px; color: #64748b;">Loading complaints...</td></tr>`;
   try {
+    await new Promise(r => setTimeout(r, 800)); // Artificial delay for viva
     const response = await fetch(API_COMPLAINTS);
     if (!response.ok) throw new Error("Network response was not ok");
     currentComplaints = await response.json();
     calculateStats();
     renderAdminTable();
   } catch (error) {
-    adminList.innerHTML = `<tr><td colspan="6" style="color:red; text-align:center;">Failed to load data. Is JSON server running?</td></tr>`;
+    adminList.innerHTML = `<tr><td colspan="6" style="color:red; text-align:center; padding: 24px;">Failed to load data. Is JSON server running?</td></tr>`;
   }
+}
+
+//  CSV 
+function exportToCSV() {
+  if (currentComplaints.length === 0) {
+    alert("No data to export!");
+    return;
+  }
+  
+  const headers = ["ID", "Name", "Gender", "Phone", "District", "Department", "Date", "Status", "Details"];
+  const csvRows = [headers.join(",")];
+  
+  currentComplaints.forEach(c => {
+    const values = [
+      c.appNo || c.id,
+      `"${(c.name || '').replace(/"/g, '""')}"`,
+      `"${(c.gender || '').replace(/"/g, '""')}"`,
+      `"${(c.phone || '').replace(/"/g, '""')}"`,
+      `"${(c.district || '').replace(/"/g, '""')}"`,
+      `"${(c.department || '').replace(/"/g, '""')}"`,
+      c.date,
+      c.status,
+      `"${(c.details || c.description || '').replace(/"/g, '""')}"`
+    ];
+    csvRows.push(values.join(","));
+  });
+  
+  const csvString = csvRows.join("\n");
+  const blob = new Blob([csvString], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  
+  const a = document.createElement("a");
+  a.setAttribute("hidden", "");
+  a.setAttribute("href", url);
+  a.setAttribute("download", "complaints_export.csv");
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
 function calculateStats() {
@@ -145,11 +185,14 @@ const outageCancelBtn = document.getElementById("outage-cancel-btn");
 let currentOutages = [];
 
 async function fetchOutages() {
-  const res = await fetch(API_OUTAGES);
-  currentOutages = await res.json();
-  outagesList.innerHTML = "";
-  
-  currentOutages.forEach(o => {
+  outagesList.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 24px; color: #64748b;">Loading outages...</td></tr>`;
+  try {
+    await new Promise(r => setTimeout(r, 800)); // Artificial delay for viva
+    const res = await fetch(API_OUTAGES);
+    currentOutages = await res.json();
+    outagesList.innerHTML = "";
+    
+    currentOutages.forEach(o => {
     let statusClass = o.status.toLowerCase();
     let statusIcon = o.status === 'Active' ? 'alert-triangle' : 'check-circle';
     const tr = document.createElement("tr");
@@ -170,6 +213,10 @@ async function fetchOutages() {
     outagesList.appendChild(tr);
   });
   lucide.createIcons();
+  } catch (err) {
+    console.error("Error fetching outages", err);
+    outagesList.innerHTML = `<tr><td colspan="5" style="color:red; text-align:center; padding: 24px;">Failed to load outages.</td></tr>`;
+  }
 }
 
 outageCancelBtn.addEventListener("click", () => {
@@ -270,11 +317,14 @@ const queueCancelBtn = document.getElementById("queue-cancel-btn");
 let currentQueues = [];
 
 async function fetchQueues() {
-  const res = await fetch(API_QUEUES);
-  currentQueues = await res.json();
-  queuesList.innerHTML = "";
-  
-  currentQueues.forEach(q => {
+  queuesList.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 24px; color: #64748b;">Loading queues...</td></tr>`;
+  try {
+    await new Promise(r => setTimeout(r, 800)); // Artificial delay for viva
+    const res = await fetch(API_QUEUES);
+    currentQueues = await res.json();
+    queuesList.innerHTML = "";
+    
+    currentQueues.forEach(q => {
     let isClosed = q.status === 'Closed' ? 'closed' : 'open';
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -292,6 +342,10 @@ async function fetchQueues() {
     queuesList.appendChild(tr);
   });
   lucide.createIcons();
+  } catch (err) {
+    console.error("Error fetching queues", err);
+    queuesList.innerHTML = `<tr><td colspan="5" style="color:red; text-align:center; padding: 24px;">Failed to load queues.</td></tr>`;
+  }
 }
 
 queueCancelBtn.addEventListener("click", () => {
