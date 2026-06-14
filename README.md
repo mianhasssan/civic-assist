@@ -62,12 +62,12 @@ To run this project locally, follow these simple steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/mianhasssan/public-utility-portal.git
+   git clone https://github.com/mianhasssan/civic-assist.git
    ```
 
 2. **Navigate into the project folder:**
    ```bash
-   cd public-utility-portal/civic-assist
+   cd civic-assist/civic-assist
    ```
 
 3. **Start the backend JSON Database:**
@@ -89,6 +89,7 @@ To run this project locally, follow these simple steps:
 - 🌐 **GitHub:** [@mianhasssan](https://github.com/mianhasssan)
 - 💼 **LinkedIn:** [https://www.linkedin.com/in/mianmuhammadhassan322]
 - 📧 **Email:** [mmh427726@gmail.com]
+- 🎓 **Roll Number:** F24BDOCS1M-01322
 
 
 > *Feel free to reach out for collaborations, feedback, or inquiries regarding this Project!*
